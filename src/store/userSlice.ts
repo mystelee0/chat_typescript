@@ -13,7 +13,7 @@ interface UserState {
 const initialState: UserState = {
   id:"test_user",
   name:"테스트유저",
-  profile:null
+  profile:"/profile.jpg"
 }
 
 export const userSlice = createSlice({
