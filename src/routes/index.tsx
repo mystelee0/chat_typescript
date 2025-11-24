@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Friends from "../pages/Friends";
-import Rooms from "../pages/rooms";
-import Settings from "../pages/settings";
+import Rooms from "../pages/Rooms";
+import Settings from "../pages/Settings";
 import PageLayout from "../components/PageLayout";
 
 export default function AppRoutes(){

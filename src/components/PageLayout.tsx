@@ -6,6 +6,8 @@ import Main from "./Main";
 
 export default function PageLayout(){
 
+    // 로그인 성공 시 유저정보 불러오기, pagelayout 마운트하며 웹소켓 연결, 자기자신 구독
+
     return(
         <PageContainer>
             <Header/>
@@ -18,7 +20,7 @@ export default function PageLayout(){
 }
 
 const PageContainer = styled.div`
-        position: relative;
+  position: relative;
   overflow:hidden;
   display: flex;
   flex-direction: column;
@@ -30,5 +32,5 @@ const PageContainer = styled.div`
   font-family: 'Arial', sans-serif;
   background:#fff;
 
-  border:none;
+  border:2px solid black;
 `
