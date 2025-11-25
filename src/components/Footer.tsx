@@ -40,14 +40,7 @@ const FooterContainer = styled.div`
   background-color: #f7f7f7;
   border-top: 1px solid #ccc;
 
-  position: absolute;  // 화면 하단 고정
   margin: 0 auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  border:2px solid yellow;
 `;
 interface FooterBoxProps {
     $active : boolean;

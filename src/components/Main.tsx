@@ -15,8 +15,8 @@ export default function Main({children} :MainProps) {
 }
 
 const MainContainer = styled.main`
-  margin-bottom:60px;
+display:flex;
+flex:1;
   padding:0;
 height:100%;
-border:2px solid green;
 `

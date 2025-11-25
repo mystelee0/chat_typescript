@@ -1,26 +1,34 @@
 import styled from "styled-components"
 import FriendListItem from "../components/FriendListItem"
+import { useAppSelector } from "../store/hooks"
+import { selectUser } from "../store/userSlice"
 
-export default function Friends(){
+export default function Friends() {
 
-    return (
+    // 사용자 정보
+    const user = useAppSelector(selectUser);
+
+    // 친구 정보
+    const friends = useAppSelector((state) => state.friends)
     
-    <FriendListContainer>
-        <h1>경로 : /friends 친구목록1 2 3 4 5 6 7 8 9 0</h1>
-        <FriendListItem friend={{name:"유저1",id:"user1",message:"test message",profile:"/profile.jpg"}} key={"1"}/>
-    </FriendListContainer>
+    return (
+        <FriendListContainer>
+            <FriendListItem friend={user} />
+            <div style={{width:"100%",height:"60px",backgroundColor:"lightgray"}}></div>
+            {
+                friends.map((friend) =>
+                    <FriendListItem friend={friend} />
+                )
+            }
+        </FriendListContainer>
     )
 }
 
 
 const FriendListContainer = styled.div`
     flex:1;
-  width: 100%;
-  
   margin: 0 auto;
   background: #fff;
   border: 1px solid #ddd;
   overflow: hidden;
-
-  border:2px solid green;
 `

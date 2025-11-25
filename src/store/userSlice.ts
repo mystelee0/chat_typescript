@@ -4,15 +4,17 @@ import type { RootState } from './store'
 
 // Define a type for the slice state
 interface UserState {
-  id:string | null,
-  name:string | null,
-  profile:string | null
+  id:string,
+  name:string,
+  message:string,
+  profile:string
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
   id:"test_user",
   name:"테스트유저",
+  message:"상태메시지",
   profile:"/profile.jpg"
 }
 

@@ -8,14 +8,13 @@ interface FriendListItemProps {
     message: string;
     profile: string;
   };
-  key?: string;
   handleOnClick?: () => void;
 }
 
-export default function FriendListItem({ friend, key, handleOnClick}: FriendListItemProps) {
+export default function FriendListItem({ friend, handleOnClick}: FriendListItemProps) {
 
     return (
-        <ItemContainer onClick={handleOnClick} key={key}>
+        <ItemContainer onClick={handleOnClick}>
             <ShowProfile imageUrls={[friend.profile]} />
             <ItemInfo>
                 <ItemTitle>{friend.name}</ItemTitle>

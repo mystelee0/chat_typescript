@@ -26,5 +26,5 @@ const PageTitle = styled.header`
  color:black;
  padding:12px 16px;
 
- border:2px solid red;
+
 `
