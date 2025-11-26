@@ -1,14 +1,20 @@
 import styled from "styled-components";
+import { useAppSelector } from "../store/hooks";
+import { selectProfileById } from "../store/friendsSlice";
 
 interface ShowProfileProps {
-    imageUrls:string[]
+    imageUrls: string[]
 }
 
-export default function ShowProfile({imageUrls }:ShowProfileProps) {
-    
-    
+export default function ShowProfile({ imageUrls }: ShowProfileProps) {
+
+
     //이미지 경로, 이미지 없으면 기본 이미지로 지정됨
-    const images = imageUrls.length ? imageUrls : "/profile.jpg";
+    const images = imageUrls
+
+    console.log(images);
+    const src0 = useAppSelector((state) => selectProfileById(state, images[0]));
+    const src1 = useAppSelector((state) => selectProfileById(state, images[1]));
 
     function renderImage() {
         switch (imageUrls.length) {
@@ -16,19 +22,33 @@ export default function ShowProfile({imageUrls }:ShowProfileProps) {
                 return (
                     <ProfileImage src={images[0]} alt="profile image" />
                 )
-            case 3:
+            case 2:
                 return (
                     <AvatarGroup>
                         <AvatarImage
-                            src={images[0]}
+                            src={src0}
+                            style={{ top: "2px", left: "2px" }}
+                        />
+                        <AvatarImage
+                            src={src1}
+                            style={{ bottom: "2px", right: "2px" }}
+                        />
+                    </AvatarGroup>
+                )
+            case 3:
+
+                return (
+                    <AvatarGroup>
+                        <AvatarImage
+                            src={src0}
                             style={{ bottom: "2px", left: "2px" }}
                         />
                         <AvatarImage
-                            src={images[1]}
+                            src={images[1] + "_profile.jpg"}
                             style={{ bottom: "2px", right: "2px" }}
                         />
                         <AvatarImage
-                            src={images[2]}
+                            src={images[2] + "_profile.jpg"}
                             style={{ top: "2px", left: "50%", transform: "translateX(-50%)" }}
                         />
                     </AvatarGroup>

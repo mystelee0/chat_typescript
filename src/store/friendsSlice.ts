@@ -14,20 +14,20 @@ interface FriendState {
 // Define the initial state using that type
 const initialState: FriendState[] = [
     {
-        id: "01011112222",
+        id: "114",
         name: "테스트유저2",
         message: "상태메시지2",
-        profile: "/profile.jpg"
+        profile: "114_profile.jpg"
     },
     {
-        id: "01011113333",
+        id: "119",
         name: "테스트유저3",
         message: "상태메시지3",
-        profile: "/profile.jpg"
+        profile: "119_profile.png"
     },
 ]
 
-export const friendListSlice = createSlice({
+export const friendsSlice = createSlice({
     name: 'friends',
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
@@ -38,9 +38,10 @@ export const friendListSlice = createSlice({
     },
 })
 
-export const { addFriend } = friendListSlice.actions
+export const { addFriend } = friendsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUser = (state: RootState) => state.user
+export const selectProfileById = (state: RootState, id: string): string =>
+    state.friends.find(f => f.id == id)?.profile ?? "";
 
-export default friendListSlice.reducer
+export default friendsSlice.reducer

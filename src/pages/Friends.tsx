@@ -10,14 +10,14 @@ export default function Friends() {
 
     // 친구 정보
     const friends = useAppSelector((state) => state.friends)
-    
+
     return (
         <FriendListContainer>
             <FriendListItem friend={user} />
             <div style={{width:"100%",height:"60px",backgroundColor:"lightgray"}}></div>
             {
-                friends.map((friend) =>
-                    <FriendListItem friend={friend} />
+                friends.map((friend,index) =>
+                    <FriendListItem friend={friend} key={index}/>
                 )
             }
         </FriendListContainer>
@@ -27,7 +27,6 @@ export default function Friends() {
 
 const FriendListContainer = styled.div`
     flex:1;
-  margin: 0 auto;
   background: #fff;
   border: 1px solid #ddd;
   overflow: hidden;

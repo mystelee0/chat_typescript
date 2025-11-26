@@ -13,7 +13,7 @@ export default function Header() {
     }
 
     return (
-        <PageTitle >
+        <PageTitle>
             {getTitle()}
         </PageTitle>
     )

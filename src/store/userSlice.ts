@@ -12,10 +12,10 @@ interface UserState {
 
 // Define the initial state using that type
 const initialState: UserState = {
-  id:"test_user",
+  id:"112",
   name:"테스트유저",
   message:"상태메시지",
-  profile:"/profile.jpg"
+  profile:"112_profile.jpg"
 }
 
 export const userSlice = createSlice({

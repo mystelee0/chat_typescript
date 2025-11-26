@@ -3,22 +3,30 @@ import Friends from "../pages/Friends";
 import Rooms from "../pages/Rooms";
 import Settings from "../pages/Settings";
 import PageLayout from "../components/PageLayout";
+import { useAppSelector } from "../store/hooks";
+import { useEffect } from "react";
 
-export default function AppRoutes(){
+export default function AppRoutes() {
 
-    return(
+    const user = useAppSelector((state) => state.user);
+
+    useEffect(() => {
+        console.log(user.name);
+    }, [user])
+
+    return (
         <BrowserRouter>
             <Routes>
                 {/** /로 접속시 /friends로 이동 */}
-                <Route path="/" element={<Navigate to="/friends" replace/>}/>
+                <Route path="/" element={<Navigate to="/friends" replace />} />
 
                 {/** 친구목록, 채팅방목록, 세팅화면 페이지 */}
-                <Route element={<PageLayout/>}>
-                    <Route path="/friends" element={<Friends/>}/>
-                    <Route path="/rooms" element={<Rooms/>}/>
-                    <Route path="/settings" element={<Settings/>}/>
+                <Route element={<PageLayout />}>
+                    <Route path="/friends" element={<Friends />} />
+                    <Route path="/rooms" element={<Rooms />} />
+                    <Route path="/settings" element={<Settings />} />
                 </Route>
-                
+
             </Routes>
         </BrowserRouter>
     )
