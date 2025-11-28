@@ -6,15 +6,22 @@ interface ShowProfileProps {
     imageUrls: string[]
 }
 
+// 컴포넌트 분리해야함 친구목록용, 방목록용
 export default function ShowProfile({ imageUrls }: ShowProfileProps) {
 
 
-    //이미지 경로, 이미지 없으면 기본 이미지로 지정됨
+    // 개인 프로필의 경우 imageUrls 바로 사용 case 1
     const images = imageUrls
 
-    console.log(images);
-    const src0 = useAppSelector((state) => selectProfileById(state, images[0]));
-    const src1 = useAppSelector((state) => selectProfileById(state, images[1]));
+    //const src0 = useAppSelector((state) => selectProfileById(state, images[0]));
+    //const src1 = useAppSelector((state) => selectProfileById(state, images[1]));
+    
+    // 여러개일경우 id 배열을 전달받음
+    // 최대 4크기의 배열을 만들고 그 안에 id를 통해 프로필경로를 가져온다.
+    const renderCount = Math.min(imageUrls.length, 4);
+    const profileImages = imageUrls.slice(0, renderCount).map((id) =>
+        useAppSelector((state) => selectProfileById(state, id))
+    );
 
     function renderImage() {
         switch (imageUrls.length) {
@@ -26,11 +33,11 @@ export default function ShowProfile({ imageUrls }: ShowProfileProps) {
                 return (
                     <AvatarGroup>
                         <AvatarImage
-                            src={src0}
+                            src={profileImages[0]}
                             style={{ top: "2px", left: "2px" }}
                         />
                         <AvatarImage
-                            src={src1}
+                            src={profileImages[1]}
                             style={{ bottom: "2px", right: "2px" }}
                         />
                     </AvatarGroup>
@@ -40,7 +47,7 @@ export default function ShowProfile({ imageUrls }: ShowProfileProps) {
                 return (
                     <AvatarGroup>
                         <AvatarImage
-                            src={src0}
+                            src={profileImages[0]}
                             style={{ bottom: "2px", left: "2px" }}
                         />
                         <AvatarImage
@@ -85,7 +92,7 @@ const AvatarGroup = styled.div`
 const AvatarImage = styled.img`
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: 16px;
   object-fit: cover;
   position: absolute;
   border: 1px solid white;
