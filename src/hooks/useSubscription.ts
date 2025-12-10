@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addSubRoom } from "../redux/subRoomSlice";
 import type { Client, IMessage, StompSubscription } from "@stomp/stompjs";
+import { addRoom } from "../store/roomsSlice";
 
 interface UseSubscriptionParams {
   client: Client | null; // 또는 undefined 가능하면 Client | null | undefined
@@ -39,10 +39,11 @@ function useSubscription(
     console.log("구독id ", subscription.id);
 
     dispatch(
-      addSubRoom({
-        roomId: subscription.id.replace("/topic/", ""),
-        roomName: roomName,
-        users: users
+      addRoom({
+        id: "roomid2",
+        name: "채팅방2",
+        lastMessage: "",
+        users: ["114","119"]
       })
     );
 

@@ -7,7 +7,7 @@ export const store = configureStore({
   reducer: {
     user:userReducer,
     friends:friendsReducer,
-    rooms:roomsReducer
+    rooms:roomsReducer,
   },
 })
 
