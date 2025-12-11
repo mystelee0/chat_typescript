@@ -4,7 +4,7 @@ import type { RootState } from './store'
 
 // Define a type for the slice state
 interface RoomsState {
-    id: string,
+    roomId: string,
     name: string,
     lastMessage: string,
     users: string[]
@@ -14,10 +14,16 @@ interface RoomsState {
 // Define the initial state using that type
 const initialState: RoomsState[] = [
     {
-        id: "roomid",
+        roomId: "roomid",
         name: "채팅방0",
         lastMessage: "테스트 마지막 메시지",
         users: ["114","119"]
+    },
+    {
+        roomId: "roomid2",
+        name: "채팅방1",
+        lastMessage: "테스트 마지막 메시지2",
+        users: ["114","119","911"]
     },
 ]
 
@@ -32,23 +38,23 @@ export const roomsSlice = createSlice({
         },
         // 채팅방 삭제
         removeRoom: (state, action: PayloadAction<string>) => {
-            return state.filter(room => room.id !== action.payload);
+            return state.filter(room => room.roomId !== action.payload);
         },
         // 메시지 수신 후 lastMessage 수정
         updateLastMessage: (state, action: PayloadAction<{ id: string; lastMessage: string }>) => {
-            const room = state.find(r => r.id === action.payload.id);
+            const room = state.find(r => r.roomId === action.payload.id);
             if (room) room.lastMessage = action.payload.lastMessage;
         },
         // 친구초대
         addUserToRoom: (state, action: PayloadAction<{ id: string; user: string }>) => {
-            const room = state.find(r => r.id === action.payload.id);
+            const room = state.find(r => r.roomId === action.payload.id);
             if (room && !room.users.includes(action.payload.user)) {
                 room.users.push(action.payload.user);
             }
         },
         // 친구 방 나감
         removeUserFromRoom: (state, action: PayloadAction<{ id: string; user: string }>) => {
-            const room = state.find(r => r.id === action.payload.id);
+            const room = state.find(r => r.roomId === action.payload.id);
             if (room) {
                 room.users = room.users.filter(u => u !== action.payload.user);
             }

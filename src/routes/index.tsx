@@ -5,6 +5,7 @@ import Settings from "../pages/Settings";
 import PageLayout from "../components/PageLayout";
 import { useAppSelector } from "../store/hooks";
 import { useEffect } from "react";
+import { Chatting } from "../pages/Chatting";
 
 export default function AppRoutes() {
 
@@ -25,6 +26,8 @@ export default function AppRoutes() {
                     <Route path="/friends" element={<Friends />} />
                     <Route path="/rooms" element={<Rooms />} />
                     <Route path="/settings" element={<Settings />} />
+
+                    <Route path="/chats/:id" element={<Chatting client={null}/>}/>
                 </Route>
 
             </Routes>

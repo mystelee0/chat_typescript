@@ -3,7 +3,7 @@ import ShowProfile from "./ShowProfile";
 
 interface RoomListItemProps {
   room: {
-    id: string;
+    roomId: string;
     name: string;
     lastMessage: string;
     users: string[];
@@ -11,19 +11,21 @@ interface RoomListItemProps {
   handleOnClick?: () => void;
 }
 
-export default function RoomListItem({ room, handleOnClick}: RoomListItemProps) {
+export default function RoomListItem({ room, handleOnClick }: RoomListItemProps) {
 
-    return (
-        <ItemContainer onClick={handleOnClick}>
-            <ShowProfile imageUrls={room.users} />
-            <ItemInfo>
-                <ItemTitle>{room.name}</ItemTitle>
+  
 
-                <ItemMessage>{room.lastMessage}</ItemMessage>
+  return (
+    <ItemContainer onClick={handleOnClick}>
+      <ShowProfile imageUrls={room.users} />
+      <ItemInfo>
+        <ItemTitle>{room.name}</ItemTitle>
 
-            </ItemInfo>
-        </ItemContainer>
-    )
+        <ItemMessage>{room.lastMessage}</ItemMessage>
+
+      </ItemInfo>
+    </ItemContainer>
+  )
 }
 
 

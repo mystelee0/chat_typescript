@@ -51,11 +51,11 @@ export default function ShowProfile({ imageUrls }: ShowProfileProps) {
                             style={{ bottom: "2px", left: "2px" }}
                         />
                         <AvatarImage
-                            src={images[1] + "_profile.jpg"}
+                            src={profileImages[1]}
                             style={{ bottom: "2px", right: "2px" }}
                         />
                         <AvatarImage
-                            src={images[2] + "_profile.jpg"}
+                            src={profileImages[2]}
                             style={{ top: "2px", left: "50%", transform: "translateX(-50%)" }}
                         />
                     </AvatarGroup>
