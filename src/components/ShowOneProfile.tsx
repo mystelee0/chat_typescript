@@ -9,9 +9,7 @@ interface ShowOneProfileProps {
 // 컴포넌트 분리해야함 친구목록용, 방목록용
 export default function ShowOneProfile({ imageUrls ="profile.jpg" }: ShowOneProfileProps) {
 
-    // 개인 프로필의 경우 imageUrls 바로 사용 case 1
-    imageUrls
-
+    // 개인 프로필의 경우
     return (
         <>
             <ProfileImage src={imageUrls} alt="profile image" />
