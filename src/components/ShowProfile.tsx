@@ -6,9 +6,9 @@ interface ShowProfileProps {
     imageUrls: string[]|undefined;
 }
 
-// 채팅방 목록
+// 채팅방 목록 전용
+// id를 배열로 받아 사용
 export default function ShowProfile({ imageUrls =["profile.jpg"] }: ShowProfileProps) {
-
     
     // 프로필 몇개 들어갈지 지정 (최대4개)
     const renderCount = Math.min(imageUrls.length, 4);

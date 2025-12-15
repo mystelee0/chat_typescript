@@ -6,7 +6,8 @@ interface ShowOneProfileProps {
     imageUrls: string|undefined;
 }
 
-// 컴포넌트 분리해야함 친구목록용, 방목록용
+// 이미지 하나 전용
+// 이미지를 바로 받는다
 export default function ShowOneProfile({ imageUrls ="profile.jpg" }: ShowOneProfileProps) {
 
     // 개인 프로필의 경우
