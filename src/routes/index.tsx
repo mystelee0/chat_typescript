@@ -6,6 +6,9 @@ import PageLayout from "../components/PageLayout";
 import { useAppSelector } from "../store/hooks";
 import { useEffect } from "react";
 import { Chatting } from "../pages/Chatting";
+import { WebsocketProvider } from "../components/WebsocketProvider";
+import { AuthProvider } from "../components/auth/AuthProvider";
+import Login from "../components/auth/Login";
 
 export default function AppRoutes() {
 
@@ -21,15 +24,25 @@ export default function AppRoutes() {
                 {/** /로 접속시 /friends로 이동 */}
                 <Route path="/" element={<Navigate to="/friends" replace />} />
 
-                {/** 친구목록, 채팅방목록, 세팅화면 페이지 */}
-                <Route element={<PageLayout />}>
-                    <Route path="/friends" element={<Friends />} />
-                    <Route path="/rooms" element={<Rooms />} />
-                    <Route path="/settings" element={<Settings />} />
+                {/** 로그인여부 체크 */}
+                <Route element={<AuthProvider />}>
+                    {/** 웹소켓 연결 client 생성 */}
+                    <Route element={<WebsocketProvider />}>
+                        {/** 친구목록, 채팅방목록, 세팅화면 페이지 */}
+                        <Route element={<PageLayout />}>
+                            <Route path="/friends" element={<Friends />} />
+                            <Route path="/rooms" element={<Rooms />} />
+                            <Route path="/settings" element={<Settings />} />
+                        </Route>
 
-                    <Route path="/chats/:id" element={<Chatting client={null}/>}/>
+                        {/** 채팅창 */}
+                        <Route path="/chats/:id" element={<Chatting client={null} />} />
+                    </Route>
                 </Route>
 
+                {/** 로그인 및 회원가입 화면 */}
+            <Route path="/login" element={<Login />} />
+            
             </Routes>
         </BrowserRouter>
     )

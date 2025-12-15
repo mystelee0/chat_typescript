@@ -7,21 +7,18 @@ import { useEffect } from "react";
 import { useWebsocket } from "../hooks/useWebsocket";
 
 export default function PageLayout(){
-
-    // 로그인 성공 시 유저정보 불러오기, pagelayout 마운트하며 웹소켓 연결, 자기자신 구독
-    //const client = useWebsocket()
     
     useEffect(()=>{
         console.log("페이지레이아웃 마운트");
     },[])
     return(
-        <PageContainer>
+        <>
             <Header/>
             <Main>
                 <Outlet/>
             </Main>
             <Footer/>
-        </PageContainer>
+        </>
     )
 }
 

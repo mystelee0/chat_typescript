@@ -13,18 +13,7 @@ interface RoomsState {
 
 // Define the initial state using that type
 const initialState: RoomsState[] = [
-    {
-        roomId: "roomid",
-        name: "채팅방0",
-        lastMessage: "테스트 마지막 메시지",
-        users: ["114","119"]
-    },
-    {
-        roomId: "roomid2",
-        name: "채팅방1",
-        lastMessage: "테스트 마지막 메시지2",
-        users: ["114","119","911"]
-    },
+
 ]
 
 export const roomsSlice = createSlice({

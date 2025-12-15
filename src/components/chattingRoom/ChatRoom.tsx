@@ -1,15 +1,14 @@
-import type { Client } from "@stomp/stompjs";
 import styled from "styled-components";
-import ChatHeader from "../components/chattingRoom/ChatHeader";
-import ChatMessages from "../components/chattingRoom/ChatMessages";
-import ChatInput from "../components/chattingRoom/ChatInput";
+import ChatHeader from "./ChatHeader";
+import ChatInput from "./ChatInput";
+//import AddPanel from "../common/AddPanel";
+import { useWebsocketClient } from "../../context/useWebsocketContext";
+import ChatMessages from "./ChatMessages";
 
-interface ClientProps{
-    client:Client | null;
-}
-
-export function Chatting({client}:ClientProps) {
-  /*
+export function ChatRoom() {
+  
+    const client = useWebsocketClient();
+    /*
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [isPanelClosing, setIsPanelClosing] = useState(false);
 
@@ -26,18 +25,16 @@ export function Chatting({client}:ClientProps) {
       // 닫기 애니메이션 시작
       setIsPanelClosing(true);
     }
-  }*/
-
+  }
+*/
   return (
-    
     <>
-    
       <ChatHeader />
       {/*isPanelVisible && <AddPanel onClose={handlePanelClose} isClosing={isPanelClosing} />*/}
       <BodyArea>
         <ChatMessages />
       </BodyArea>
-      <ChatInput />
+      <ChatInput/>
     </>
   )
 }

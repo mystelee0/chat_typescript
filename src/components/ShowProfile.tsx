@@ -3,31 +3,34 @@ import { useAppSelector } from "../store/hooks";
 import { selectProfileById } from "../store/friendsSlice";
 
 interface ShowProfileProps {
-    imageUrls: string[]
+    imageUrls: string[]|undefined;
 }
 
 // 컴포넌트 분리해야함 친구목록용, 방목록용
-export default function ShowProfile({ imageUrls }: ShowProfileProps) {
-
+export default function ShowProfile({ imageUrls =["profile.jpg"] }: ShowProfileProps) {
 
     // 개인 프로필의 경우 imageUrls 바로 사용 case 1
     const images = imageUrls
-
     //const src0 = useAppSelector((state) => selectProfileById(state, images[0]));
     //const src1 = useAppSelector((state) => selectProfileById(state, images[1]));
     
     // 여러개일경우 id 배열을 전달받음
     // 최대 4크기의 배열을 만들고 그 안에 id를 통해 프로필경로를 가져온다.
     const renderCount = Math.min(imageUrls.length, 4);
-    const profileImages = imageUrls.slice(0, renderCount).map((id) =>
-        useAppSelector((state) => selectProfileById(state, id))
+    // const profileImages = imageUrls.slice(0, renderCount).map((id) =>
+    //     useAppSelector((state) => selectProfileById(state, id))
+    // );
+    let profileImages = useAppSelector((state) =>
+    imageUrls?.map((id) => selectProfileById(state, id)) ?? []
     );
+    profileImages = profileImages.slice(0,renderCount);
 
     function renderImage() {
+        console.log(profileImages)
         switch (imageUrls.length) {
             case 1:
                 return (
-                    <ProfileImage src={images[0]} alt="profile image" />
+                    <ProfileImage src={'/'+profileImages[0]} alt="profile image" />
                 )
             case 2:
                 return (

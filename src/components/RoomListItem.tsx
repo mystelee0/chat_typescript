@@ -8,15 +8,15 @@ interface RoomListItemProps {
     lastMessage: string;
     users: string[];
   };
-  handleOnClick?: () => void;
+  handleOnClick?: (roomId: string) => void;
 }
 
 export default function RoomListItem({ room, handleOnClick }: RoomListItemProps) {
 
-  
+
 
   return (
-    <ItemContainer onClick={handleOnClick}>
+    <ItemContainer onClick={()=>handleOnClick?.(room.roomId)}>
       <ShowProfile imageUrls={room.users} />
       <ItemInfo>
         <ItemTitle>{room.name}</ItemTitle>

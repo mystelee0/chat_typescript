@@ -1,21 +1,18 @@
 import styled from "styled-components";
 import ShowProfile from "./ShowProfile";
+import type { FriendState } from "../types/friend";
+import ShowOneProfile from "./ShowOneProfile";
 
 interface FriendListItemProps {
-  friend: {
-    id: string;
-    name: string;
-    message: string;
-    profile: string;
-  };
+  friend: FriendState;
   handleOnClick?: () => void;
 }
 
-export default function FriendListItem({ friend, handleOnClick}: FriendListItemProps) {
+export default function FriendListItem({ friend, handleOnClick}:FriendListItemProps) {
 
     return (
         <ItemContainer onClick={handleOnClick}>
-            <ShowProfile imageUrls={[friend.profile]} />
+            <ShowOneProfile imageUrls={friend.profile??"profile.jpg"} />
             <ItemInfo>
                 <ItemTitle>{friend.name}</ItemTitle>
 

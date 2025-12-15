@@ -40,10 +40,10 @@ function useSubscription(
 
     dispatch(
       addRoom({
-        id: "roomid2",
-        name: "채팅방2",
+        roomId: subscription.id.replace("/topic/",""),
+        name: roomName,
         lastMessage: "",
-        users: ["114","119"]
+        users: users,
       })
     );
 

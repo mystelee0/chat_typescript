@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useAppSelector } from "../store/hooks"
-import { selectUser } from "../store/userSlice"
 import RoomListItem from "../components/RoomListItem";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Rooms() {
 
     const rooms = useAppSelector((state)=>state.rooms);
+
     const navigate = useNavigate();
 
     function handleOnClick(roomId:string){

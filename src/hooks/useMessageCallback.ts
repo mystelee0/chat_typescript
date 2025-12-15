@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux";
-import { addMessage } from "../redux/chatSlice";
 import type { IMessage } from "@stomp/stompjs";
+import { useAppDispatch } from "../store/hooks";
+import { addMessage } from "../store/chatSlice";
+
 function useMessageCallback() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (message:IMessage) => {
         if (message.body) {

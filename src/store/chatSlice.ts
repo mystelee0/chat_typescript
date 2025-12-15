@@ -2,11 +2,12 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { FriendState } from "../types/friend";
 
 
-interface ChatMessage{
+export interface ChatMessage{
     roomId: string;
     messageType: number;
     sender: FriendState;
     message: string;
+    date:string;
 }
 
 interface ChatRoom{
@@ -18,7 +19,7 @@ const initialState:ChatRoom[] =[
         {
             roomId:"101",
             msgs:[
-                {roomId: "101",messageType : 2, sender : {id:"system",name:"system",message:"",profile:""}, message : 'this is test message'},
+                {roomId: "101",messageType : 2, sender : {id:"system",name:"system",message:"",profile:""}, message : 'this is test message',date:new Date().toString()},
             ]
         },
     ]
@@ -34,7 +35,7 @@ export const chatSlice=createSlice({
             let idx=state.findIndex(room=>room.roomId===pid);
 
             if(idx===-1){ // 초대된 경우
-                alert('새로운 roomId '+msg.roomId);
+                console.log("새롭게 방 추가");
                 state.push({
                     roomId:msg.roomId,
                     msgs:[msg]

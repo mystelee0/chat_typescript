@@ -5,7 +5,7 @@ const WS_IP = import.meta.env.VITE_WS_IP;
 
 export function useWebsocket() {
     const [client, setClient] = useState<Client | null>(null);
-
+    console.log(WS_IP);
     useEffect(() => {
         const c = new Client({
             brokerURL: `${WS_IP}/websocket-server`,

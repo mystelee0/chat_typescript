@@ -27,7 +27,7 @@ export default function Friends() {
 
 const FriendListContainer = styled.div`
     flex:1;
-  background: #fff;
-  border: 1px solid #ddd;
-  overflow: hidden;
+    background: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
 `
