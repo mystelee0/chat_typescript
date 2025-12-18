@@ -9,7 +9,7 @@ interface ShowOneProfileProps {
 // 이미지 하나 전용
 // 이미지를 바로 받는다
 export default function ShowOneProfile({ imageUrls ="profile.jpg" }: ShowOneProfileProps) {
-
+  
     // 개인 프로필의 경우
     return (
         <>

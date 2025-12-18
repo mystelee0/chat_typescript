@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "../../store/hooks";
 import MessageTime from "./MessageTime";
-import ShowProfile from "../ShowProfile";
 import type { ChatMessage } from "../../store/chatSlice";
 import ShowOneProfile from "../ShowOneProfile";
 

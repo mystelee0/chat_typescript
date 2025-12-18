@@ -5,14 +5,18 @@ import type { UserState } from '../types/user'
 
 // Define the initial state using that type
 const initialState: UserState = {
-}
+  id:"",
+  name:"",
+  profile:"",
+  message:""
+};
 
 export const userSlice = createSlice({
   name: 'user',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
+    setUser: (_tate, action: PayloadAction<UserState>) => {
       console.log("setUser 호출");
       return action.payload;
     },
