@@ -10,14 +10,14 @@ function MessageTime({time}:MessageTimeProps){
     let h = date.getHours();
     let m = date.getMinutes();
     let amPm = '오전';
-    let mStr:string;
+    let mStr:string = '';
     
     if( h >= 12 ) amPm="오후";
     if( h >= 13 ) h = h-12; 
-    if( m < 10 ) mStr = "0"+m;
+    mStr = m.toString().padStart(2, '0');
     
 
-    return <span style={{fontSize:"12px",color:"black",alignSelf:"flex-end", marginRight:"5px"}}>{`${amPm} ${h}:${m}`}</span>
+    return <span style={{fontSize:"12px",color:"black",alignSelf:"flex-end", marginRight:"5px"}}>{`${amPm} ${h}:${mStr}`}</span>
     
 }
 

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../../store/hooks";
-import MessageTime from "./MessageTime";
 import type { ChatMessage } from "../../store/chatSlice";
-import ShowOneProfile from "../ShowOneProfile";
+import DateSeparator from "./DateSeparator";
+import UserMessage from "./UserMessage";
+import SystemMessage from "./SystemMessage";
 
 interface RenderSwitchParam{
     msg:ChatMessage;
@@ -14,88 +15,19 @@ interface RenderSwitchParam{
 }
 
 function ChatMessages() {
-
-    const params = useParams()
-
-    let messages = useAppSelector((state) => state.chat.find(ob => ob.roomId === params.id))
+    const params = useParams();
+    let messages = useAppSelector((state) => state.chat.find(ob => ob.roomId === params.id));
     let user = useAppSelector((state) => state.user);
     console.log("지금 채팅메시지 유저 명", user.id);
 
     let prev, next;
-    
     const containerRef = useRef<HTMLDivElement|null>(null);
     
     useEffect(()=>{
         //맨 밑으로 자동 스크롤
         //containerRef.current.scrollTo({top:containerRef.current.scrollHeight, behavior:"smooth"});
-    },[messages])
+    },[messages]);
 
-    // 조건에 따른 메시지 출력 함수
-    function renderSwitch({msg, index, prev, next}:RenderSwitchParam) {
-        let nextDate: Date|null=null;
-        let prevDate: Date|null=null;
-        let nextHm:string="";
-        let prevHm:string="";
-        if(next?.date){
-            nextDate = new Date(next?.date);
-            nextHm = nextDate.getHours()+""+nextDate.getMinutes();
-        }
-        if(prev?.date){
-            prevDate = new Date(prev?.date);
-            prevHm = prevDate.getHours()+""+prevDate.getMinutes();
-        }
-            
-        let msgDate = new Date(msg?.date);
-        let msgHm = msgDate.getHours()+""+msgDate.getMinutes();
-
-        // 시간 표시여부 default : true
-        let timeRender = true;
-
-        // 현 채팅과 다음 채팅의 유저정보와 시간이 같을경우
-        if (next?.sender?.id === msg?.sender?.id && nextHm === msgHm) { //옵셔널 체이닝 적용해봄
-            //시간컴포넌트 미표시
-            timeRender = false;
-        }
-
-        // 1. 사용자 메시지
-        if (msg.messageType === 1)
-
-            // 1.1 본인 메시지 (콜백으로 받은 메시지가 자기자신이 보낸 경우)
-            if (msg.sender.id === user.id)
-                return (
-                    <RightContainer key={index}>
-                        {timeRender?<MessageTime time={msg.date} />:null}
-                        <MyMessage >{msg.message}</MyMessage>
-                    </RightContainer>
-                )
-            // 1.2 상대방 메시지 시작 (첫 메시지 || 이전 메시지가 있는데, 보낸 사람이 다른 경우 || 같은 사용자지만 시간이 다른경우)
-            else if ( (!prev || prev && prev.sender.id !== msg.sender.id) || prevHm!==msgHm)
-                // 프로필 이미지, 닉네임, 메시지 같이 출력
-                return (
-                    <LeftContainer key={index}>
-                        <ShowOneProfile imageUrls={msg.sender.profile} />
-                        <OtherInfoContainer>
-                            <div style={{ textAlign: "left", color: "black" }}>{msg.sender.name}</div>
-                            <OtherMessage key={index}>{msg.message}</OtherMessage>
-                        </OtherInfoContainer>
-                        {timeRender?<MessageTime time={msg.date} />:null}
-                    </LeftContainer>
-                )
-            // 1.3 상대방 메시지 이어짐
-            else
-                // 메시지만 출력 
-                return (
-                    <LeftContainer key={index}>
-                        <div style={{ width: "48px", height: "40px", marginLeft: "12px" }}></div>
-                        <OtherMessage key={index}>{msg.message}</OtherMessage>
-                        {timeRender?<MessageTime time={msg.date} />:null}
-                    </LeftContainer>
-                )
-        // 2. 시스템 메시지 
-        if (msg.messageType === 2)
-            return <SystemMessage key={index}>{`System : ${msg.message}`}</SystemMessage>;
-
-    }
     return (
         <MessagesContainer ref={containerRef}>
             {
@@ -110,13 +42,18 @@ function ChatMessages() {
 
                         let showDate = false;
                         if(prevDate.getDate()!== msgDate.getDate()) showDate = true;
-                        const render = renderSwitch({msg, index, prev, next});
- 
+                        let messageComponent;
+                        if (msg.messageType === 1) {
+                            messageComponent = <UserMessage msg={msg} index={index} prev={prev} next={next} userId={user.id} />;
+                        } else if (msg.messageType === 2) {
+                            messageComponent = <SystemMessage message={msg.message} index={index} />;
+                        }
+                        console.log(msgDate.getMonth());
                         return (
-                            <>
-                            {showDate?<SystemMessage>{msgDate.getFullYear()+'년 '+msgDate.getMonth()+'월 '+msgDate.getDate()+'일'}</SystemMessage>:null}
-                            {render}
-                            </>
+                            <React.Fragment key={index}>
+                                {showDate ? <DateSeparator time={msg.date} /> : null}
+                                {messageComponent}
+                            </React.Fragment>
                         )
                     })
                     : null
@@ -146,45 +83,5 @@ gap: 5px;
 
   /* Firefox */
   scrollbar-width: none;
-`;
-const RightContainer = styled.div`
-    display:flex;
-    justify-content:flex-end; //수평정렬
-    width:100%;
-`;
-const MyMessage = styled.div`
-align-self: flex-end; //수직정렬
-background-color: #dcf8c6;
-padding: 8px 12px;
-border-radius: 12px;
-max-width: 45%;
-word-break: break-word;
-color:black;
-text-align:left;
-`;
-const LeftContainer = styled.div`
-    display:flex;
-`;
-const OtherInfoContainer = styled.div`
-    display:flex;
-    flex-direction: column;
-`;
-const OtherMessage = styled.div`
-align-self: flex-start;
-background-color: white;
-padding: 8px 12px;
-border-radius: 12px;
-max-width: 100%;
-word-break: break-word;
-color:black;
-text-align:left;
-`;
-
-const SystemMessage = styled.div`
-  align-self: center;
-  font-size: 12px;
-  color: #777;
-  margin: 8px 0;
-  white-space: pre-wrap;
 `;
 export default ChatMessages;
