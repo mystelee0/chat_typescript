@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useAppSelector } from "../store/hooks";
-import { selectProfileById } from "../store/friendsSlice";
 
 interface ShowOneProfileProps {
     imageUrls: string|undefined;
@@ -23,23 +21,4 @@ const ProfileImage = styled.img`
   height: 48px;
   border-radius: 16px;
   margin-right: 12px;
-`;
-
-const AvatarGroup = styled.div`
-  width: 48px;
-  height: 48px;
-  background: #f0f0f0;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  margin-right:12px;
-`;
-
-const AvatarImage = styled.img`
-  width: 24px;
-  height: 24px;
-  border-radius: 16px;
-  object-fit: cover;
-  position: absolute;
-  border: 1px solid white;
 `;

@@ -1,19 +1,30 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function ChatHeader() {
+interface ChatHeaderProps {
+  onOpenPanel?: () => void;
+}
+
+function ChatHeader({ onOpenPanel }: ChatHeaderProps) {
 
   const navigate = useNavigate();
 
   return (
-    <>
     <Header>
-      <BackButton onClick={()=>navigate("/rooms")}>←</BackButton>
-      <Title>채팅방</Title>
-      <Hamburger >☰</Hamburger>
-    </Header>
-    </>
+        <BackButton onClick={() => navigate("/rooms")}>←</BackButton>
+        <Title>채팅방</Title>
+        <Hamburger
+          aria-label="open menu"
+          onClick={() => {
+            // debug log to verify click
+            // eslint-disable-next-line no-console
+            console.log('ChatHeader: hamburger clicked');
+            onOpenPanel && onOpenPanel();
+          }}
+        >
+          ☰
+        </Hamburger>
+      </Header>
   );
 }
 
@@ -40,12 +51,15 @@ const Title = styled.span`
   color:black;
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
   font-weight: bold;
   font-size: 22px;
-  color:black;
-  margin-left:auto;
-  margin-right:5px;
+  color: black;
+  margin-left: auto;
+  margin-right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
 `;
 
 

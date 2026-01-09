@@ -1,8 +1,10 @@
 import type { Client } from "@stomp/stompjs";
+import React from "react";
 import styled from "styled-components";
 import ChatHeader from "../components/chattingRoom/ChatHeader";
 import ChatMessages from "../components/chattingRoom/ChatMessages";
 import ChatInput from "../components/chattingRoom/ChatInput";
+import SlidingPanel from "../components/chattingRoom/SlidingPanel";
 
 interface ClientProps{
     client:Client | null;
@@ -28,17 +30,20 @@ export function Chatting({client}:ClientProps) {
     }
   }*/
 
+  const [panelOpen, setPanelOpen] = React.useState(false);
+
   return (
-    
-    <>
-    
-      <ChatHeader />
-      {/*isPanelVisible && <AddPanel onClose={handlePanelClose} isClosing={isPanelClosing} />*/}
+    <RoomWrapper>
+      <ChatHeader onOpenPanel={() => setPanelOpen(true)} />
+
       <BodyArea>
         <ChatMessages />
       </BodyArea>
+
       <ChatInput />
-    </>
+
+      <SlidingPanel open={panelOpen} onClose={() => setPanelOpen(false)} />
+    </RoomWrapper>
   )
 }
 
@@ -47,4 +52,12 @@ const BodyArea = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+`;
+
+const RoomWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100%;
 `;

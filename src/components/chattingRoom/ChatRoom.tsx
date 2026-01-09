@@ -1,6 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
+import SlidingPanel from "./SlidingPanel";
 //import AddPanel from "../common/AddPanel";
 import { useWebsocketClient } from "../../context/useWebsocketContext";
 import ChatMessages from "./ChatMessages";
@@ -27,15 +29,21 @@ export function ChatRoom() {
     }
   }
 */
+  const [panelOpen, setPanelOpen] = React.useState(false);
+
   return (
-    <>
-      <ChatHeader />
-      {/*isPanelVisible && <AddPanel onClose={handlePanelClose} isClosing={isPanelClosing} />*/}
+    <RoomWrapper>
+      <ChatHeader onOpenPanel={() => setPanelOpen(true)} />
+
       <BodyArea>
         <ChatMessages />
       </BodyArea>
-      <ChatInput/>
-    </>
+
+      <ChatInput />
+
+      {/* SlidingPanel rendered inside RoomWrapper so it overlays the entire chat room */}
+      <SlidingPanel open={panelOpen} onClose={() => setPanelOpen(false)} />
+    </RoomWrapper>
   )
 }
 
@@ -44,4 +52,12 @@ const BodyArea = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+`;
+
+const RoomWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 `;
