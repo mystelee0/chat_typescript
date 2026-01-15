@@ -9,6 +9,7 @@ import { Chatting } from "../pages/Chatting";
 import { WebsocketProvider } from "../components/WebsocketProvider";
 import { AuthProvider } from "../components/auth/AuthProvider";
 import Login from "../components/auth/Login";
+import { SignUp } from "../components/auth/Signup";
 
 export default function AppRoutes() {
 
@@ -42,7 +43,7 @@ export default function AppRoutes() {
 
                 {/** 로그인 및 회원가입 화면 */}
             <Route path="/login" element={<Login />} />
-            
+            <Route path="/signup" element={<SignUp />} />
             </Routes>
         </BrowserRouter>
     )

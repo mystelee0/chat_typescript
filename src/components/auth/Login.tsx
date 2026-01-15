@@ -38,7 +38,7 @@ function Login() {
     return (
         <Container>
             <LoginBox>
-                <Logo src="/jjanggu.jpeg" alt="Kakao Logo" />
+                <Logo src="/kakao.png" alt="Kakao Logo" />
                 <Title>채팅하자 로그인</Title>
                 <Input placeholder="전화번호" name="id" onChange={handleChange}></Input>
                 <Input placeholder="비밀번호" name="password" onChange={handleChange}></Input>

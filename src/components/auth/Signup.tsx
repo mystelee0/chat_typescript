@@ -41,8 +41,8 @@ export function SignUp() {
   return (
     <Container>
       <LoginBox>
-        <Logo src="/jjanggu.jpeg" alt="Logo" />
-        <Title>채팅하자 회원가입</Title>
+        <Logo src="/kakao.png" alt="Logo" />
+        <Title>카톡 회원가입</Title>
         <Input placeholder="아이디" name="id" onChange={handleChange}></Input>
         <Input placeholder="이름" name="name" onChange={handleChange}></Input>
         <Input placeholder="비밀번호" name="password" onChange={handleChange}></Input>

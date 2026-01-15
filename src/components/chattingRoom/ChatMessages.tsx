@@ -25,7 +25,6 @@ function ChatMessages() {
     
     useEffect(()=>{
         //가만히 있을때는 맨 밑으로 자동 스크롤되는데 스크롤을 올리면 맨 밑으로 자동스크롤되는걸 멈춤
-        //containerRef.current.scrollTo({top:containerRef.current.scrollHeight, behavior:"smooth"});
         if(containerRef.current){
             const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
             const isAtBottom = scrollTop + clientHeight >= scrollHeight - 50; // 50px 오차 허용
